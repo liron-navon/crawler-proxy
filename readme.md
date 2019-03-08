@@ -30,11 +30,14 @@ For redirects you can get the last destination url from the header "x-final-dest
 
 ---
 
+You don't have to install heroku globally, it is a devDependencies for the project,
+you can login using `npm run heroku-login`.
+
 ### one command
 You can deploy and update in a single command using npm, just pass HNAME (heroku name) and HREG (heroku region) environment variables.
 ```
-HNAME=my-proxy-name HREG=eu npm deploy-to-heroku 
-HNAME=my-proxy-name npm update-in-heroku
+HNAME=my-proxy-name HREG=eu npm run deploy-to-heroku 
+HNAME=my-proxy-name npm run update-in-heroku
 ```
 
 

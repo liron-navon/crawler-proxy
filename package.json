@@ -11,8 +11,9 @@
     "start": "npm run build && npm run dist:start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "heroku-login": "heroku login",
     "deploy-to-heroku": "heroku create $HNAME --region $HREG && heroku git:remote -a $HNAME && heroku buildpacks:add --index 1 heroku/nodejs && heroku buildpacks:add jontewks/puppeteer && git push heroku master",
-    "update-in-heroku": "heroku git:remote -a $HNAME && jontewks/puppeteer && git push heroku master"
+    "update-in-heroku": "heroku git:remote -a $HNAME && git push heroku master"
   },
   "author": "liron-navon",
   "repository": "https://github.com/liron-navon/ytdl-express-server",
@@ -33,6 +34,7 @@
     "babel-register": "^6.26.0",
     "clean-webpack-plugin": "^0.1.19",
     "git-hooks": "^1.1.10",
+    "heroku": "^7.22.4",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
     "ts-loader": "^4.5.0",
