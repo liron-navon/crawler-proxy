@@ -26,9 +26,19 @@ When using `crawl-render` it will run a browser and keep using it, you might wan
 
 For redirects you can get the last destination url from the header "x-final-destination"
 
+
+
 ---
 
-deploy to heroku:
+### one command
+You can deploy and update in a single command using npm, just pass HNAME (heroku name) and HREG (heroku region) environment variables.
+```
+HNAME=my-proxy-name HREG=eu npm deploy-to-heroku 
+HNAME=my-proxy-name npm update-in-heroku
+```
+
+
+### deploy to heroku:
 ```
 heroku create
 
@@ -38,12 +48,12 @@ heroku git:remote -a [app name]
 
 Set buildpacks for the app to run properly on heroku
 ```
-heroku buildpacks:set jontewks/puppeteer
+heroku buildpacks:add jontewks/puppeteer
 heroku buildpacks:add --index 1 heroku/nodejs
 heroku buildpacks # should output node, and then puppeteer
 
 # if you need asian languages like japanese and korean:
-heroku buildpacks:set https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack.git
+heroku buildpacks:add https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack.git
 ```
 ```
 git push heroku master

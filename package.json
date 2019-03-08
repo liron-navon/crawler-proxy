@@ -10,7 +10,9 @@
     "dist:start": "node ./dist/server.js",
     "start": "npm run build && npm run dist:start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tslint": "tslint -c tslint.json -p tsconfig.json"
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "deploy-to-heroku": "heroku create $HNAME --region $HREG && heroku git:remote -a $HNAME && heroku buildpacks:add --index 1 heroku/nodejs && heroku buildpacks:add jontewks/puppeteer && git push heroku master",
+    "update-in-heroku": "heroku git:remote -a $HNAME && jontewks/puppeteer && git push heroku master"
   },
   "author": "liron-navon",
   "repository": "https://github.com/liron-navon/ytdl-express-server",
