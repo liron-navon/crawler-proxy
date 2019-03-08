@@ -10,6 +10,7 @@ const getUrlFrom = (identifier, url) => {
 router.get('/crawl-plain/:url*', async (req: Request, res: Response) => {
     const url = getUrlFrom('/crawl-plain/', req.url);
     const { destination, html } = await fetchPLAIN(url);
+    console.log('x-final-destination', destination)
     res.setHeader('x-final-destination', destination);
     res.send(html);
 });
@@ -17,6 +18,7 @@ router.get('/crawl-plain/:url*', async (req: Request, res: Response) => {
 router.get('/crawl-render/:url*', async (req: Request, res: Response) => {
     const url = getUrlFrom('/crawl-render/', req.url);
     const { destination, html } = await fetchRENDER(url);
+    console.log('x-final-destination', destination)
     res.setHeader('x-final-destination', destination);
     res.send(html);
 });

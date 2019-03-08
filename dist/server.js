@@ -152,7 +152,7 @@ const fetch = (url) => __awaiter(this, void 0, void 0, function* () {
     const html = yield page.content();
     const output = {
         html,
-        destination: page.url
+        destination: page.url()
     };
     yield page.close();
     return output;
@@ -232,12 +232,14 @@ const getUrlFrom = (identifier, url) => {
 router.get('/crawl-plain/:url*', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const url = getUrlFrom('/crawl-plain/', req.url);
     const { destination, html } = yield fetch_1.fetchPLAIN(url);
+    console.log('x-final-destination', destination);
     res.setHeader('x-final-destination', destination);
     res.send(html);
 }));
 router.get('/crawl-render/:url*', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const url = getUrlFrom('/crawl-render/', req.url);
     const { destination, html } = yield fetch_1.fetchRENDER(url);
+    console.log('x-final-destination', destination);
     res.setHeader('x-final-destination', destination);
     res.send(html);
 }));

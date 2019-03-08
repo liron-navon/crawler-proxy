@@ -40,7 +40,6 @@ HNAME=my-proxy-name HREG=eu npm run deploy-to-heroku
 HNAME=my-proxy-name npm run update-in-heroku
 ```
 
-
 ### deploy to heroku:
 ```
 heroku create
@@ -51,8 +50,8 @@ heroku git:remote -a [app name]
 
 Set buildpacks for the app to run properly on heroku
 ```
-heroku buildpacks:add jontewks/puppeteer
 heroku buildpacks:add --index 1 heroku/nodejs
+heroku buildpacks:add jontewks/puppeteer
 heroku buildpacks # should output node, and then puppeteer
 
 # if you need asian languages like japanese and korean:

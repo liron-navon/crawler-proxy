@@ -20,7 +20,7 @@ const fetch = async (url: string) => {
     const html = await page.content();
     const output = {
         html,
-        destination: page.url
+        destination: page.url()
     };
     await page.close();
     return output;
