@@ -1,9 +1,9 @@
 # crawler proxy
 
-A simple server to help crawl websites and bypass ip blocking or banning, it will download html and render javascript using puppeteer, and return the rendered html - protecting your computer/server ip from the target you try to scrape.
+A simple server to help crawl websites and bypass ip blocking or banning, it will download html and render javascript using puppeteer, and return the rendered html - protecting your computer/server ip from the target you try to scrape, this service is ment to be similar to services like [https://scrapinghub.com/crawlera](crawlera), but with a more limited functionality (for now).
 
 Live demo: [return a rendered github page](https://a42-crawler-proxy-1.herokuapp.com/crawl-render/https://github.com), [return an unrendered github page](https://a42-crawler-proxy-1.herokuapp.com/crawl-plain/https://github.com).
-You can play around with `a42-crawler-proxy-1`, but I will probably delete 1-15 in the future, I only use them temporarily for a project.
+You can play around with `a42-crawler-proxy-[1-20]`, but I will probably delete some of them in the future and keep only `a42-crawler-proxy-1`, I only use them temporarily for a project.
 
 to run:
 ```
@@ -32,14 +32,11 @@ For redirects you can get the last destination url from the header "x-final-dest
 
 Install heroku globally and login, it causes bugs when installed as a dev dependency.
 
-### one command
-You can deploy and update in a single command using npm, just pass HNAME (heroku name) and HREG (heroku region) environment variables.
+### one command deployment
+
+You can deploy and update multiple instances using the file `dinos.js`, it does take a quite some time for heroku to set up the new instances, just define a name and a region.
+
 ```
-HNAME=my-proxy-name HREG=eu npm run heroku-deploy
-HNAME=my-proxy-name npm run heroku-update
-
-# OR using the dinos from dinos.js
-
 npm run heroku-deploy-all
 npm run heroku-update-all
 ```

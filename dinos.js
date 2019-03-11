@@ -38,7 +38,7 @@ const dinos = [
     {
         name: 'a42-crawler-proxy-10',
         region: 'eu',
-    }
+    },
     {
         name: 'a42-crawler-proxy-11',
         region: 'us',
@@ -58,7 +58,7 @@ const dinos = [
     {
         name: 'a42-crawler-proxy-15',
         region: 'eu',
-    }
+    },
     {
         name: 'a42-crawler-proxy-16',
         region: 'us',
