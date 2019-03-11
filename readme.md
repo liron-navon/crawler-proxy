@@ -3,7 +3,7 @@
 A simple server to help crawl websites and bypass ip blocking or banning, it will download html and render javascript using puppeteer, and return the rendered html - protecting your computer/server ip from the target you try to scrape.
 
 Live demo: [return a rendered github page](https://a42-crawler-proxy-1.herokuapp.com/crawl-render/https://github.com), [return an unrendered github page](https://a42-crawler-proxy-1.herokuapp.com/crawl-plain/https://github.com).
-You can use and play around with `a42-crawler-proxy-1`, `a42-crawler-proxy-2`, and `a42-crawler-proxy-3`, they are free dynos so they will be very slow.
+You can play around with `a42-crawler-proxy-1`, but I will probably delete 1-15 in the future, I only use them temporarily for a project.
 
 to run:
 ```
@@ -30,14 +30,18 @@ For redirects you can get the last destination url from the header "x-final-dest
 
 ---
 
-You don't have to install heroku globally, it is a devDependencies for the project,
-you can login using `npm run heroku-login`.
+Install heroku globally and login, it causes bugs when installed as a dev dependency.
 
 ### one command
 You can deploy and update in a single command using npm, just pass HNAME (heroku name) and HREG (heroku region) environment variables.
 ```
-HNAME=my-proxy-name HREG=eu npm run deploy-to-heroku 
-HNAME=my-proxy-name npm run update-in-heroku
+HNAME=my-proxy-name HREG=eu npm run heroku-deploy
+HNAME=my-proxy-name npm run heroku-update
+
+# OR using the dinos from dinos.js
+
+npm run heroku-deploy-all
+npm run heroku-update-all
 ```
 
 ### deploy to heroku:
@@ -87,7 +91,19 @@ let proxyNumber = 0;
 const proxies = [
     'https://a42-crawler-proxy-1.herokuapp.com',
     'https://a42-crawler-proxy-2.herokuapp.com',
-    'https://a42-crawler-proxy-3.herokuapp.com'
+    'https://a42-crawler-proxy-3.herokuapp.com',
+    'https://a42-crawler-proxy-4.herokuapp.com',
+    'https://a42-crawler-proxy-5.herokuapp.com',
+    'https://a42-crawler-proxy-6.herokuapp.com',
+    'https://a42-crawler-proxy-7.herokuapp.com',
+    'https://a42-crawler-proxy-8.herokuapp.com',
+    'https://a42-crawler-proxy-9.herokuapp.com',
+    'https://a42-crawler-proxy-10.herokuapp.com',
+    'https://a42-crawler-proxy-11.herokuapp.com',
+    'https://a42-crawler-proxy-12.herokuapp.com',
+    'https://a42-crawler-proxy-13.herokuapp.com',
+    'https://a42-crawler-proxy-14.herokuapp.com',
+    'https://a42-crawler-proxy-15.herokuapp.com'
 ];
 
 // used to prevent recaptcha and bot spamming detection by rotating the ip address
