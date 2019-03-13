@@ -176,7 +176,6 @@ const express = __webpack_require__(/*! express */ "express");
 const cors = __webpack_require__(/*! cors */ "cors");
 const bodyParser = __webpack_require__(/*! body-parser */ "body-parser");
 const routes_1 = __webpack_require__(/*! ./routes */ "./src/routes/index.ts");
-// import './proxylist-refresher/proxyListRefresher';
 const PORT = process.env.PORT || 3000;
 const app = express();
 process.on('uncaughtException', function (err) {
@@ -224,11 +223,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __webpack_require__(/*! express */ "express");
 const fetch_1 = __webpack_require__(/*! ../fetch/fetch */ "./src/fetch/fetch.ts");
+const proxy = __webpack_require__(/*! express-http-proxy */ "express-http-proxy");
+const getIP_1 = __webpack_require__(/*! src/utils/getIP */ "./src/utils/getIP.ts");
 const router = express_1.Router();
 const getUrlFrom = (identifier, url) => {
     const index = url.indexOf(identifier) + identifier.length;
     return url.substr(index);
 };
+// proxy to download html and return the final destination
 router.get('/crawl-plain/:url*', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const url = getUrlFrom('/crawl-plain/', req.url);
     const { destination, html } = yield fetch_1.fetchPLAIN(url);
@@ -236,6 +238,7 @@ router.get('/crawl-plain/:url*', (req, res) => __awaiter(this, void 0, void 0, f
     res.setHeader('x-final-destination', destination);
     res.send(html);
 }));
+// proxy ssr
 router.get('/crawl-render/:url*', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const url = getUrlFrom('/crawl-render/', req.url);
     const { destination, html } = yield fetch_1.fetchRENDER(url);
@@ -243,7 +246,45 @@ router.get('/crawl-render/:url*', (req, res) => __awaiter(this, void 0, void 0, 
     res.setHeader('x-final-destination', destination);
     res.send(html);
 }));
+// if you need a regular proxy
+router.get('/proxy', proxy(getIP_1.getIP()));
+// if you need a regular on a specific host
+router.get('/proxy/:host*', (req, res, next) => {
+    return proxy(req.params.host)(req, res, next);
+});
 exports.default = router;
+
+
+/***/ }),
+
+/***/ "./src/utils/getIP.ts":
+/*!****************************!*\
+  !*** ./src/utils/getIP.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const os = __webpack_require__(/*! os */ "os");
+const ifaces = os.networkInterfaces();
+// return the ip for the current computer
+exports.getIP = () => {
+    const ipAddresses = [];
+    Object.keys(ifaces).forEach(ifname => {
+        let alias = 0;
+        ifaces[ifname].forEach(function (iface) {
+            if ('IPv4' !== iface.family || iface.internal !== false) {
+                // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+                return false;
+            }
+            ipAddresses.push(iface.address);
+            ++alias;
+        });
+    });
+    return ipAddresses[0];
+};
 
 
 /***/ }),
@@ -278,6 +319,28 @@ module.exports = require("cors");
 /***/ (function(module, exports) {
 
 module.exports = require("express");
+
+/***/ }),
+
+/***/ "express-http-proxy":
+/*!*************************************!*\
+  !*** external "express-http-proxy" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("express-http-proxy");
+
+/***/ }),
+
+/***/ "os":
+/*!*********************!*\
+  !*** external "os" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("os");
 
 /***/ }),
 

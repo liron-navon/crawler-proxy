@@ -10,7 +10,16 @@ to run:
 npm start
 ```
 
-routes:
+If you need a regular HTTP/S proxy, you can use `/proxy`, e.g `http://localhost:3000/proxy`, and pass it to pupateer as 
+```
+puppeteer.launch({ proxy: 'http://localhost:3000/proxy' })
+```
+
+This project uses [express-http-proxy](https://www.npmjs.com/package/express-http-proxy) which support custom proxy hosts, it can be used using `proxy/<HOST>`, for example `http://localhost:3000/proxy/https://www.google.com`.
+
+---
+
+For simple use cases you can just use the scraping proxy which will always return whatever you try to GET:
 ```
 GET http://localhost:3000/crawl-plain/<URL>
 GET http://localhost:3000/crawl-render/<URL>

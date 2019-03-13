@@ -2,11 +2,6 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import routes from './routes';
-// import './proxylist-refresher/proxyListRefresher';
-
-
-
-
 
 const PORT =  process.env.PORT || 3000;
 const app = express();
